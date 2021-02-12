@@ -51,4 +51,8 @@ class AccountDataRepository @Inject constructor(
     override fun addFavoritePost(post: UserFavoritePosts) {
        userFavoriteDao.addUserFavPost(post)
     }
+
+    override fun updateUploadedOnServer(postId: Int, value: Boolean) {
+        userFavoriteDao.updateUploadedOnServer(postId,value)
+    }
 }

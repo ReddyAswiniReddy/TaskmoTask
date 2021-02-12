@@ -17,7 +17,7 @@ class FavoritePostsAdapter() : RecyclerView.Adapter<FavoritePostsAdapter.PostVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.row_posts, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.row_fav_posts, parent, false)
         return PostViewHolder(view)
     }
 

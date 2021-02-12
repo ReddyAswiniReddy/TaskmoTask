@@ -20,4 +20,6 @@ interface AccountRepository {
     fun removeFavoritePost(id: Int)
 
     fun addFavoritePost(post:UserFavoritePosts)
+
+    fun updateUploadedOnServer(postId:Int,value:Boolean)
 }

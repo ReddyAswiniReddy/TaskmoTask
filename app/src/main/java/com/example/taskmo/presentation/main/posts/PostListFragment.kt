@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.taskmo.R
 import com.example.taskmo.app.AppController
 import com.example.taskmo.data.account.entity.UserPosts
-import com.example.taskmo.di.presenter.ActivityModule
 import com.example.taskmo.di.presenter.DaggerPresenterComponent
 import com.example.taskmo.presentation.base.Resource
 import com.example.taskmo.presentation.base.SafeObserver
@@ -18,7 +17,6 @@ import com.example.taskmo.presentation.base.Status
 import com.example.taskmo.presentation.main.comments.CommentsListFragment
 import com.example.taskmo.presentation.main.posts.adapter.PostsAdapter
 import com.example.taskmo.utils.addFragment
-import com.example.taskmo.utils.hide
 import com.example.taskmo.utils.invisible
 import kotlinx.android.synthetic.main.fragment_post_list.*
 import javax.inject.Inject
@@ -72,7 +70,6 @@ class PostListFragment : Fragment() {
     private fun injectFragment() {
         DaggerPresenterComponent.builder()
             .appComponent(AppController.instance.appComponent)
-            .activityModule(ActivityModule(requireActivity()))
             .build().inject(this)
     }
 

@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.taskmo.R
 import com.example.taskmo.app.AppController
 import com.example.taskmo.data.account.entity.UserPosts
-import com.example.taskmo.di.presenter.ActivityModule
 import com.example.taskmo.di.presenter.DaggerPresenterComponent
 import com.example.taskmo.domain.repository.Comments
 import com.example.taskmo.presentation.base.Resource
@@ -94,7 +93,6 @@ class CommentsListFragment : Fragment() ,View.OnClickListener{
     private fun injectFragment(){
         DaggerPresenterComponent.builder()
             .appComponent(AppController.instance.appComponent)
-            .activityModule(ActivityModule(requireActivity()))
             .build().inject(this)
     }
 

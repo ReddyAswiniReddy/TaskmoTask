@@ -53,8 +53,8 @@ dependencies {
     implementation "androidx.multidex:multidex:$multidex_version"
 
     //viewmodel
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha02"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
 
     // Material Design
     implementation "com.google.android.material:material:1.3.0"
@@ -81,11 +81,11 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     // Room
-    implementation "androidx.room:room-runtime:2.1.0"
-    kapt "androidx.room:room-compiler:2.1.0"
-    implementation "androidx.room:room-rxjava2:2.1.0"
+    implementation "androidx.room:room-runtime:2.2.6"
+    kapt "androidx.room:room-compiler:2.2.6"
+    implementation "androidx.room:room-rxjava2:2.2.6"
 
     //Dagger
-    implementation  'com.google.dagger:dagger:2.18'
+    implementation  'com.google.dagger:dagger:2.27'
     kapt 'com.google.dagger:dagger-compiler:2.18'
 }

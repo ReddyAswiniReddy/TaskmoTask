@@ -11,7 +11,7 @@ import dagger.Component
 
 @Component(
     dependencies = [AppComponent::class],
-    modules = [ActivityModule::class, ViewModelModule::class, ViewModelFactoryModule::class]
+    modules = [ViewModelModule::class, ViewModelFactoryModule::class]
 )
 @PerPresenter
 interface PresenterComponent {

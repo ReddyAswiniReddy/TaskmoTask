@@ -4,20 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.taskmo.R
 import com.example.taskmo.app.AppController
 import com.example.taskmo.data.account.entity.UserFavoritePosts
-import com.example.taskmo.data.account.entity.UserPosts
-import com.example.taskmo.di.presenter.ActivityModule
 import com.example.taskmo.di.presenter.DaggerPresenterComponent
 import com.example.taskmo.presentation.base.SafeObserver
-import com.example.taskmo.presentation.main.comments.CommentsListFragment
 import com.example.taskmo.presentation.main.favorites.adapter.FavoritePostsAdapter
-import com.example.taskmo.presentation.main.posts.adapter.PostsAdapter
-import com.example.taskmo.utils.addFragment
 import com.example.taskmo.utils.hide
 import com.example.taskmo.utils.invisible
 import com.example.taskmo.utils.show
@@ -89,7 +83,6 @@ class FavoritesFragment : Fragment() {
     private fun injectFragment() {
         DaggerPresenterComponent.builder()
             .appComponent(AppController.instance.appComponent)
-            .activityModule(ActivityModule(requireActivity()))
             .build().inject(this)
     }
 }

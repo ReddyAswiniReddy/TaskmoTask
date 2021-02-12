@@ -11,25 +11,38 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.taskmo.R
+import com.example.taskmo.app.AppController
+import com.example.taskmo.di.presenter.DaggerPresenterComponent
+import com.example.taskmo.domain.repository.AccountRepository
 import com.example.taskmo.presentation.main.favorites.FavoritesFragment
 import com.example.taskmo.presentation.main.posts.PostListFragment
 import com.example.taskmo.utils.Const.BOOLEAN_DEFAULT_VALUE
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
 
     var isConnectionAvailable:Boolean = BOOLEAN_DEFAULT_VALUE
 
+    @Inject
+    lateinit var accountRepository:AccountRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        injectActivity()
         manageBottomNavigationView()
-
         connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
+    }
+
+    private fun injectActivity(){
+        DaggerPresenterComponent.builder()
+            .appComponent(AppController.instance.appComponent)
+            .build().inject(this)
     }
 
     private fun manageBottomNavigationView() {
@@ -42,12 +55,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.favorites -> selectedFragment = FavoritesFragment.getInstance()
             }
             val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-            selectedFragment?.let { transaction.replace(R.id.frame_layout, it) }
+            selectedFragment?.let { transaction.replace(R.id.flParent, it) }
             transaction.commit()
             true
         }
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frame_layout, PostListFragment.getInstance())
+        transaction.replace(R.id.flParent, PostListFragment.getInstance())
         transaction.commit()
     }
 
@@ -94,6 +107,23 @@ class MainActivity : AppCompatActivity() {
         isConnectionAvailable = isConnectionON
         if (!isConnectionON) {
             Snackbar.make(rlMain, getString(R.string.no_internet), Snackbar.LENGTH_LONG).show()
+        }else{
+            checkFavoritePostUploadedOnServer()
+        }
+    }
+
+    private fun checkFavoritePostUploadedOnServer(){
+        val userFavorites = accountRepository.getUserFavorite()
+        val favNotUploadedOnServer = userFavorites.filter { !it.uploadedOnServer }
+        if(favNotUploadedOnServer.isNotEmpty()){
+            /**TODO:: Here call add favorites Api, to uploaded these local favorites list to Server.
+             *        After that Update these list of objects "uploadedOnServer" param to true
+             */
+
+            //Updating local objects values
+            favNotUploadedOnServer?.forEach {
+                accountRepository.updateUploadedOnServer(it.id,true)
+            }
         }
     }
 }

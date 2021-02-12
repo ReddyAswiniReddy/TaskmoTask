@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.taskmo.R
 
 
-const val fragmentContainerId = R.id.frame_layout
+const val fragmentContainerId = R.id.flParent
 
 fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
     beginTransaction().func().commitAllowingStateLoss()

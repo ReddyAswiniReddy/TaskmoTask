@@ -24,6 +24,10 @@ interface UserFavoriteDao {
     @Query("Select * from userfavoriteposts")
     fun getUserFavPostLiveData(): LiveData<List<UserFavoritePosts>?>
 
+    @Query("UPDATE userfavoriteposts SET uploadedOnServer=:value WHERE id = :postId")
+    fun updateUploadedOnServer(postId:Int,value:Boolean)
+
+
     @Query("DELETE FROM userfavoriteposts")
     fun clearTable()
 }
